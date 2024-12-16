@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'users',
     'publications',
     'comments',
+    "phonenumber_field",
 
 ]
 
