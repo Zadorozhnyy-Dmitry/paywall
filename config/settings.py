@@ -25,10 +25,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # 'base',
-    # 'users',
-    # 'publications',
-    # 'comments',
+    'base',
+    'users',
+    'publications',
+    'comments',
 
 ]
 
@@ -116,6 +116,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # my variables
 NULLABLE = {"blank": True, "null": True}
 
-# AUTH_USER_MODEL = "users.User"
+AUTH_USER_MODEL = "users.User"
 
 NUMBER_OF_PUBLICATION_ON_PAGE = 10
