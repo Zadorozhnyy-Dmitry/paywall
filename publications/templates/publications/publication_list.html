@@ -1,0 +1,96 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load my_tags %}
+{% block title %}Список публикаций{% endblock title %}
+{% block content %}
+
+<!-- Основные публикации со ссылками -->
+<div class="row g-5">
+
+    <!-- Левая часть с публикациями -->
+    <div class="col-md-12">
+        <h3 class="pb-4 mb-4 fst-italic border-bottom text-center">
+            Публикации
+        </h3>
+
+        {% for object in object_list %}
+        <!-- для пагинации -->
+        {{ object.full_name|upper }}<br>
+        <!-- Карточка публикации -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <!-- Заголовок -->
+                <h4 class="card-title">{{ object.title }}</h4>
+
+                <!-- Мета данные -->
+                <ul class="list-group list-group-horizontal">
+                    <img class="img-fluid" src="{{ object.author.avatar | media_filter}}" width="40px">
+                    <li class="list-group-item">
+                        {{ object.author.nickname }}
+                    </li>
+                    <li class="list-group-item">
+                        {{object.created_at}}
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Содержание публикации -->
+            <div class="card-body">
+                <!-- Изображение -->
+                {% if object.preview %}
+                <img src="{{ object.preview | media_filter}}" class="figure-img img-fluid rounded" width="400px">
+                {% endif %}
+                <p class="card-text">{{ object.body | truncatechars:100 }}</p>
+
+                <!-- ссылка делает всю карточку кликабельной -->
+                <a href="{% url 'publications:publication_view' object.pk %}"
+                   class="icon-link gap-1 icon-link-hover stretched-link">
+                    Подробнее
+                </a>
+
+            </div>
+            <div class="card-footer">
+                <!-- Отображение просмотров и лайков -->
+                <p class="card-text">
+                    <small class="text-body-secondary">
+                        <ul class="list-inline">
+                            <li class="list-inline-item">
+                                <img class="img-fluid" src="{% static 'img/views.png' %}" width="25px">
+                                <b>{{ object.views_count }}</b>
+                            </li>
+                            <li class="list-inline-item">
+                                <img class="img-fluid" src="{% static 'img/likes.png' %}" width="20px">
+                                <b>{{ object.liked_by.all.count }}</b>
+                            </li>
+                        </ul>
+                    </small>
+                </p>
+            </div>
+        </div>
+
+        <hr>
+        {% endfor %}
+
+        <!-- Пагинация -->
+        <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page=1">&laquo; На первую</a>
+                    <a href="?page={{ page_obj.previous_page_number }}">предыдущая</a>
+                {% endif %}
+
+                <span class="current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                </span>
+
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">следующая</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}">На последнюю &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+        <hr>
+    </div>
+</div>
+
+{% endblock %}

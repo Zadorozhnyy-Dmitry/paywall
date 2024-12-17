@@ -1,0 +1,31 @@
+{% extends 'base/base.html' %}
+{% block title %}Редактирование комментария{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <h3>Редактирование комментария</h3>
+            <form class="row" method="post" enctype="multipart/form-data">
+                <div class="card">
+                    <div class="card-body">
+                        {% csrf_token %}
+                        {{ form.text }}
+                    </div>
+
+                    <!-- Кнопки -->
+                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                        <button type="submit" class="btn btn-outline-success ml-5 px-2 pb-md-2 mx-2" role="button">
+                            Сохранить
+                        </button>
+                        <a class="btn btn-outline-primary px-2 pb-md-2 mx-2"
+                           href="{% url 'publications:publication_view' pk=object.publication.pk %}"
+                           role="button">Назад</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

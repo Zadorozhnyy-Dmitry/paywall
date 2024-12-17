@@ -1,0 +1,44 @@
+{% extends 'base/base.html' %}
+{% block title %}
+{% if object %}
+Изменить публикацию
+{% else %}
+Создать публикацию
+{% endif %}
+{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <form class="row" method="post" enctype="multipart/form-data">
+                <div class="card">
+                    <div class="card-body">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                    </div>
+
+                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                        {% if object %}
+                        <a class="btn btn-outline-primary px-2 pb-md-2 mx-2"
+                           href="{% url 'publications:publication_view' pk=object.pk %}"
+                           role="button">Назад</a>
+                        <button type="submit" class="btn btn-outline-success ml-5 px-2 pb-md-2 mx-2" role="button">
+                            Сохранить
+                        </button>
+                        {% else %}
+                        <a class="btn btn-outline-primary px-2 pb-md-2 mx-2"
+                           href="{% url 'publications:publication_list' %}"
+                           role="button">Назад</a>
+                        <button type="submit" class="btn btn-outline-success ml-5 px-2 pb-md-2 mx-2" role="button">
+                            Создать
+                        </button>
+                        {% endif %}
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

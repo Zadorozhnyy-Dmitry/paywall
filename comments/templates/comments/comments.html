@@ -1,0 +1,58 @@
+{% load my_tags %}
+<!-- Карточка комментариев -->
+<div class="card mb-3">
+    <!-- Добавить новый комментарий -->
+    <div class="card-heater">
+        <div class="row">
+            <h5 class="mt-3 mb-3">Добавить комментарий:</h5>
+            <form method="post" enctype="multipart/form-data"
+                  action="{% url 'comments:comment_create' pk=publication.pk %}">
+                {% csrf_token %}
+                {{ comment_form.text }}
+                <button class="btn btn-outline-primary mt-3" type="submit">Отправить</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Список комментариев -->
+    <div class="card-body">
+        <h4 class="mt-3 mb-3">Комментарии пользователей:</h4>
+        {% if comments %}
+        <div class="row">
+            <h5 class="card-title">Количество комментариев: {{comments.count}}</h5>
+            {% for comment in comments %}
+            <div class="card mb-3">
+                <!-- Мета данные -->
+                <div class="card-header">
+                    <ul class="list-group list-group-horizontal">
+                        <img class="img-fluid" src="{{ comment.author.avatar | media_filter}}" width="40px">
+                        <li class="list-group-item">
+                            <span>{{ comment.author.nickname }}</span>
+                        </li>
+                        <li class="list-group-item">
+                            {{comment.created_at}}
+                        </li>
+                    </ul>
+                </div>
+                <!-- Содержание комментария -->
+                <div class="card-body">
+                    <p class="card-text">{{ comment.text }}</p>
+                </div>
+                <!-- Кнопки и дата -->
+                <div class="card-footer">
+                    <!-- {% if user == comment.autor or user.is_superuser %} -->
+                    <a class="btn btn-outline-primary" href="{% url 'comments:comment_update' comment.pk %}"
+                       role="button">Редактировать</a>
+                    <a class="btn btn-outline-danger" href="{% url 'comments:comment_delete' comment.pk%}"
+                       role="button">Удалить</a>
+                    <!-- {% endif %}  -->
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+        {% else %}
+        <p>Нет комментариев</p>
+        {% endif %}
+    </div>
+</div>

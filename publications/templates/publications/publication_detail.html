@@ -1,0 +1,68 @@
+{% extends 'base/base.html' %}
+{% load my_tags %}
+{% load static %}
+{% block content %}
+
+<!-- Карточка публикации -->
+<div class="card mb-3">
+    <div class="card-header">
+        <!-- Заголовок -->
+        <h3 class="card-title">{{ object.title }}</h3>
+
+        <!-- Мета данные -->
+        <ul class="list-group list-group-horizontal">
+            <img class="img-fluid" src="{{ object.author.avatar | media_filter}}" width="40px">
+            <li class="list-group-item">
+                {{ object.author.nickname }}
+            </li>
+            <li class="list-group-item">
+                {{object.created_at}}
+            </li>
+        </ul>
+    </div>
+
+    <!-- Содержание публикации -->
+    <div class="card-body">
+        <!-- Изображение -->
+        {% if object.preview %}
+        <img src="{{ object.preview | media_filter}}" class="figure-img img-fluid rounded" width="400px">
+        {% endif %}
+        <p class="card-text">{{ object.body }}</p>
+    </div>
+
+    <div class="card-footer">
+        <!-- Отображение просмотров и лайков -->
+        <ul class="list-group list-group-horizontal">
+            <li class="list-group-item">
+                <img class="img-fluid" src="{% static 'img/views.png' %}" width="25px">
+                <b>{{ object.views_count }}</b>
+            </li>
+            <!-- Поставить / удалить лайк -->
+            <li class="list-group-item">
+                <form method="post" action="{% url 'publications:like' object.pk %}">
+                    {% csrf_token %}
+                    <button style="background: transparent; border: none; box-shadow: none;" type="submit">
+                        <img class="img-fluid" src="{% static 'img/likes.png' %}" width="20px">
+                        <span>{{ object.liked_by.all.count }}</span>
+                </form>
+            </li>
+            <!-- Кнопки -->
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <a class="btn btn-outline-primary" href="{% url 'publications:publication_list' %}"
+                   role="button">Назад</a>
+                <!--{% if user == object.autor or user.is_superuser %} -->
+                <a class="btn btn-outline-primary" href="{% url 'publications:publication_update' object.pk %}"
+                   role="button">Редактировать</a>
+                <a class="btn btn-outline-danger" href="{% url 'publications:publication_delete' object.pk %}"
+                   role="button">Удалить</a>
+                <!--            {% endif %}  -->
+            </div>
+        </ul>
+    </div>
+</div>
+
+<!-- Комментарии -->
+{% include 'comments/comments.html' with publication=publication comments=publication.comments.all%}
+
+
+{% endblock %}
