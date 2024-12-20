@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'publications',
     'comments',
     "phonenumber_field",
+    'codes',
 
 ]
 
@@ -122,3 +123,5 @@ LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
 
 NUMBER_OF_PUBLICATION_ON_PAGE = 3
+
+NUMBER_OF_ITEMS_IN_VERIFICATION_CODE = 5
