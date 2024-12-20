@@ -4,6 +4,7 @@ from comments.forms import CommentForm
 from comments.models import Comment
 from publications.models import Publication
 from django.urls import reverse
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class BaseCommentView:
@@ -18,7 +19,7 @@ class BaseCommentView:
         )
 
 
-class CommentCreateView(BaseCommentView, CreateView):
+class CommentCreateView(BaseCommentView, CreateView, LoginRequiredMixin):
     """Контроллер для создания комментария"""
     form_class = CommentForm
 
@@ -29,14 +30,14 @@ class CommentCreateView(BaseCommentView, CreateView):
         return super().form_valid(form)
 
 
-class CommentUpdateView(BaseCommentView, UpdateView):
+class CommentUpdateView(BaseCommentView, UpdateView, LoginRequiredMixin):
     """Контроллер для редактирования комментария"""
     form_class = CommentForm
     template_name = 'comments/comment_form.html'
     extra_context = {"title": "Редактировать комментарий"}
 
 
-class CommentDeleteView(BaseCommentView, DeleteView):
+class CommentDeleteView(BaseCommentView, DeleteView, LoginRequiredMixin):
     """Контроллер для удаления комментария"""
     template_name = 'comments/comment_confirm_delete.html'
     extra_context = {"title": "Удалить комментарий"}

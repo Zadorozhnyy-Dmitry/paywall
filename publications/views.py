@@ -15,6 +15,7 @@ from django.urls import reverse_lazy, reverse
 from pytils.translit import slugify
 from django.views import View
 from django.http import HttpResponseRedirect
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class PublicationListView(ListView):
@@ -45,7 +46,7 @@ class PublicationDetailView(DetailView):
         return context
 
 
-class PublicationCreateView(CreateView):
+class PublicationCreateView(CreateView, LoginRequiredMixin):
     """Контроллер создания публикации"""
 
     model = Publication
@@ -63,7 +64,7 @@ class PublicationCreateView(CreateView):
         return super().form_valid(form)
 
 
-class PublicationUpdateView(UpdateView):
+class PublicationUpdateView(UpdateView, LoginRequiredMixin):
     """Контроллер изменения публикации"""
 
     model = Publication
@@ -84,7 +85,7 @@ class PublicationUpdateView(UpdateView):
         return reverse("publications:publication_view", args=[self.kwargs.get("pk")])
 
 
-class PublicationDeleteView(DeleteView):
+class PublicationDeleteView(DeleteView, LoginRequiredMixin):
     """Контроллер удаления публикации"""
 
     model = Publication
@@ -93,7 +94,7 @@ class PublicationDeleteView(DeleteView):
     success_url = reverse_lazy("publications:publication_list")
 
 
-class AddRemoveLike(View):
+class AddRemoveLike(View, LoginRequiredMixin):
     """Контроллер для лайка"""
 
     def post(self, request, pk, *args, **kwargs):

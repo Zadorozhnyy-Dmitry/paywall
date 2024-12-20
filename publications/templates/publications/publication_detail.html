@@ -11,7 +11,9 @@
 
         <!-- Мета данные -->
         <ul class="list-group list-group-horizontal">
+            {% if object.autor.avatar %}
             <img class="img-fluid" src="{{ object.author.avatar | media_filter}}" width="40px">
+            {% endif %}
             <li class="list-group-item">
                 {{ object.author.nickname }}
             </li>

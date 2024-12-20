@@ -7,7 +7,7 @@
 <!-- Основные публикации со ссылками -->
 <div class="row g-5">
 
-    <!-- Левая часть с публикациями -->
+    <!-- Публикации -->
     <div class="col-md-12">
         <h3 class="pb-4 mb-4 fst-italic border-bottom text-center">
             Публикации
@@ -24,7 +24,9 @@
 
                 <!-- Мета данные -->
                 <ul class="list-group list-group-horizontal">
+                    {% if object.author.avatar %}
                     <img class="img-fluid" src="{{ object.author.avatar | media_filter}}" width="40px">
+                    {% endif %}
                     <li class="list-group-item">
                         {{ object.author.nickname }}
                     </li>
