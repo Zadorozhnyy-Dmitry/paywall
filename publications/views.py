@@ -25,6 +25,31 @@ class PublicationListView(ListView):
     model = Publication
     extra_context = {"title": "Публикации", 'back_to_top': True}
 
+    def get_queryset(self, *args, **kwargs):
+        """ Запрет просмотр платного контента без подписки"""
+
+        queryset = super().get_queryset(*args, **kwargs)
+        # Условие: пользователя нет в БД или не имеет подписку
+        if not self.request.user.pk or not self.request.user.is_sub:
+            queryset = queryset.exclude(is_paid=True)
+        return queryset
+
+
+class PublicationOwnerListView(ListView):
+    """Контроллер для списка своих публикаций"""
+
+    paginate_by = NUMBER_OF_PUBLICATION_ON_PAGE
+    model = Publication
+    extra_context = {"title": "Мои публикации", 'back_to_top': True}
+
+    def get_queryset(self, *args, **kwargs):
+        """ Возвращает список публикаций, для которых пользователь является автором"""
+
+        queryset = super().get_queryset(*args, **kwargs)
+        user = self.request.user
+        queryset = queryset.filter(author=user)
+        return queryset
+
 
 class PublicationDetailView(DetailView):
     """Контроллер для детального просмотра публикаций"""

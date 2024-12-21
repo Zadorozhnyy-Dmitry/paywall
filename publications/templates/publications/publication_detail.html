@@ -11,7 +11,7 @@
 
         <!-- Мета данные -->
         <ul class="list-group list-group-horizontal">
-            {% if object.autor.avatar %}
+            {% if object.author.avatar %}
             <img class="img-fluid" src="{{ object.author.avatar | media_filter}}" width="40px">
             {% endif %}
             <li class="list-group-item">
@@ -20,6 +20,11 @@
             <li class="list-group-item">
                 {{object.created_at}}
             </li>
+            {% if object.is_paid %}
+            <li class="list-group-item">
+                <img class="img-fluid" src="{% static 'img/paid_publication.png' %}" width="30px">
+            </li>
+            {% endif %}
         </ul>
     </div>
 
@@ -52,12 +57,12 @@
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <a class="btn btn-outline-primary" href="{% url 'publications:publication_list' %}"
                    role="button">Назад</a>
-                <!--{% if user == object.autor or user.is_superuser %} -->
+                {% if user == object.author or user.is_superuser %}
                 <a class="btn btn-outline-primary" href="{% url 'publications:publication_update' object.pk %}"
                    role="button">Редактировать</a>
                 <a class="btn btn-outline-danger" href="{% url 'publications:publication_delete' object.pk %}"
                    role="button">Удалить</a>
-                <!--            {% endif %}  -->
+                {% endif %}
             </div>
         </ul>
     </div>

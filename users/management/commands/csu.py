@@ -7,9 +7,9 @@ class Command(BaseCommand):
     """Кастомная команда для создания суперпользователя"""
 
     def handle(self, *args, **options):
-        user = User.objects.create(phone="+79990000000")
+        user = User.objects.create(phone="+79999999999")
         user.set_password("admin")
-        user.nickname = 'admin_alt'
+        user.nickname = 'admin'
         user.is_active = True
         user.is_staff = True
         user.is_superuser = True

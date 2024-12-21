@@ -44,12 +44,12 @@
                 </div>
                 <!-- Кнопки и дата -->
                 <div class="card-footer">
-                    <!-- {% if user == comment.autor or user.is_superuser %} -->
+                    {% if user == comment.author or user.is_superuser %}
                     <a class="btn btn-outline-primary" href="{% url 'comments:comment_update' comment.pk %}"
                        role="button">Редактировать</a>
                     <a class="btn btn-outline-danger" href="{% url 'comments:comment_delete' comment.pk%}"
                        role="button">Удалить</a>
-                    <!-- {% endif %}  -->
+                    {% endif %}
                 </div>
             </div>
             {% endfor %}

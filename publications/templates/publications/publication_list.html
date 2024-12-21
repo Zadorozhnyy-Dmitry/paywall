@@ -10,7 +10,11 @@
     <!-- Публикации -->
     <div class="col-md-12">
         <h3 class="pb-4 mb-4 fst-italic border-bottom text-center">
+            {% if title == 'Мои публикации' %}
+            Мои публикации
+            {% else %}
             Публикации
+            {% endif %}
         </h3>
 
         {% for object in object_list %}
@@ -33,6 +37,11 @@
                     <li class="list-group-item">
                         {{object.created_at}}
                     </li>
+                    {% if object.is_paid %}
+                    <li class="list-group-item">
+                        <img class="img-fluid" src="{% static 'img/paid_publication.png' %}" width="30px">
+                    </li>
+                    {% endif %}
                 </ul>
             </div>
 
