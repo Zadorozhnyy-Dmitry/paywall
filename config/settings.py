@@ -122,6 +122,10 @@ AUTH_USER_MODEL = "users.User"
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
 
-NUMBER_OF_PUBLICATION_ON_PAGE = 3
+NUMBER_OF_PUBLICATION_ON_PAGE = 3  # Пагинация: кол-во публикаций на странице
 
-NUMBER_OF_ITEMS_IN_VERIFICATION_CODE = 5
+NUMBER_OF_ITEMS_IN_VERIFICATION_CODE = 5  # Верификация: кол-во цифр в коде
+
+STRIPE_API_KEY = os.getenv("STRIPE_API_KEY")
+
+SUBSCRIPTION_COST = 1000  # Цена подписки на публикации
