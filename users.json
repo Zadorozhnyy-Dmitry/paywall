@@ -1,0 +1,108 @@
+[
+  {
+    "model": "users.user",
+    "pk": 12,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$gWu4YlHr1z3R5a5COVg5RV$JugD84PXOWg3HyFL4hLAprg8tkp4BwsP9yELoenwYjY=",
+      "last_login": "2024-12-21T22:55:41.651Z",
+      "is_superuser": true,
+      "first_name": "",
+      "last_name": "",
+      "email": "",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2024-12-20T22:38:16Z",
+      "phone": "+79999999999",
+      "avatar": "users/avatars/ava5.jpeg",
+      "nickname": "admin",
+      "is_sub": true,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 13,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$VspnAqsW3JCv3L84lnZBiG$aAIB38Pj57Pj7wbbmqHPeIbiQGfEf7PqDDCMyT5DDEM=",
+      "last_login": "2024-12-21T22:56:56.268Z",
+      "is_superuser": false,
+      "first_name": "",
+      "last_name": "",
+      "email": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-12-20T22:39:03Z",
+      "phone": "+79991111111",
+      "avatar": "users/avatars/ava1.png",
+      "nickname": "user_1",
+      "is_sub": true,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 14,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$6tekjQ4v5D6swN2d8zUw9O$uDoj1O4iRnDn9AZn9VBWntNq6IKbadUndlDQ6gKWcd0=",
+      "last_login": "2024-12-21T22:04:50Z",
+      "is_superuser": false,
+      "first_name": "",
+      "last_name": "",
+      "email": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-12-20T22:42:18Z",
+      "phone": "+79992222222",
+      "avatar": "users/avatars/ava3.jpg",
+      "nickname": "user_2",
+      "is_sub": false,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 15,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$Padq9oqjwxudSLBPI5XgLC$/NgbW5Ktz+JUgwFGwzOCx+JWegjBWPF7koHgZgKtKBw=",
+      "last_login": "2024-12-21T14:56:40Z",
+      "is_superuser": false,
+      "first_name": "",
+      "last_name": "",
+      "email": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-12-20T22:46:07Z",
+      "phone": "+79993333333",
+      "avatar": "users/avatars/ava4.jpeg",
+      "nickname": "user_3",
+      "is_sub": false,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.paidsubscription",
+    "pk": 15,
+    "fields": {
+      "user": null,
+      "paid_date": "2024-12-21T22:57:03.495Z",
+      "amount": null,
+      "session_id": null,
+      "link": null
+    }
+  },
+  {
+    "model": "users.paidsubscription",
+    "pk": 16,
+    "fields": {
+      "user": 13,
+      "paid_date": "2024-12-21T22:58:23.492Z",
+      "amount": 1000,
+      "session_id": "cs_test_a1bZOhMdpYJiwVZEn6lKdROBsEendNlPhXil7o9vjbk2vgvhuwYd4jZNQC",
+      "link": "https://checkout.stripe.com/c/pay/cs_test_a1bZOhMdpYJiwVZEn6lKdROBsEendNlPhXil7o9vjbk2vgvhuwYd4jZNQC#fidkdWxOYHwnPyd1blpxYHZxWjA0VE9cbHRJbXNyM1M0SHJiXEpANEZ8XEx0X1QzVV1pR11iZlJiUWFkNzFzd2ZIbGoyaXRkZHwxSENDY0tEUFdrd0xjSzViTWJpPEpAYE9pdE10NjA8dk9SNTVScWxdM2BAUycpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl"
+    }
+  }
+]

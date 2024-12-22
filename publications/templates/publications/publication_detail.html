@@ -45,6 +45,7 @@
                 <b>{{ object.views_count }}</b>
             </li>
             <!-- Поставить / удалить лайк -->
+            {% if user.is_authenticated %}
             <li class="list-group-item">
                 <form method="post" action="{% url 'publications:like' object.pk %}">
                     {% csrf_token %}
@@ -53,6 +54,12 @@
                         <span>{{ object.liked_by.all.count }}</span>
                 </form>
             </li>
+            {% else %}
+            <li class="list-group-item">
+                <img class="img-fluid" src="{% static 'img/likes.png' %}" width="20px">
+                <b>{{ object.liked_by.all.count }}</b>
+            </li>
+            {% endif %}
             <!-- Кнопки -->
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <a class="btn btn-outline-primary" href="{% url 'publications:publication_list' %}"
