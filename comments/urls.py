@@ -6,7 +6,17 @@ from comments.views import CommentUpdateView, CommentCreateView, CommentDeleteVi
 app_name = CommentsConfig.name
 
 urlpatterns = [
-    path("create/<int:pk>/", CommentCreateView.as_view(), name="comment_create"),  # создание комментария
-    path("update/<int:pk>/", CommentUpdateView.as_view(), name="comment_update", ),  # редактирование комментария
-    path("delete/<int:pk>/", CommentDeleteView.as_view(), name="comment_delete", ),  # удаление комментария
+    path(
+        "create/<int:pk>/", CommentCreateView.as_view(), name="comment_create"
+    ),  # создание комментария
+    path(
+        "update/<int:pk>/",
+        CommentUpdateView.as_view(),
+        name="comment_update",
+    ),  # редактирование комментария
+    path(
+        "delete/<int:pk>/",
+        CommentDeleteView.as_view(),
+        name="comment_delete",
+    ),  # удаление комментария
 ]

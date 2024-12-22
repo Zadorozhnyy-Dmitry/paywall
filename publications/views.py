@@ -23,10 +23,10 @@ class PublicationListView(ListView):
 
     paginate_by = NUMBER_OF_PUBLICATION_ON_PAGE
     model = Publication
-    extra_context = {"title": "Публикации", 'back_to_top': True}
+    extra_context = {"title": "Публикации", "back_to_top": True}
 
     def get_queryset(self, *args, **kwargs):
-        """ Запрет просмотр платного контента без подписки"""
+        """Запрет просмотр платного контента без подписки"""
 
         queryset = super().get_queryset(*args, **kwargs)
         # Условие: пользователя нет в БД или не имеет подписку
@@ -40,10 +40,10 @@ class PublicationOwnerListView(ListView):
 
     paginate_by = NUMBER_OF_PUBLICATION_ON_PAGE
     model = Publication
-    extra_context = {"title": "Мои публикации", 'back_to_top': True}
+    extra_context = {"title": "Мои публикации", "back_to_top": True}
 
     def get_queryset(self, *args, **kwargs):
-        """ Возвращает список публикаций, для которых пользователь является автором"""
+        """Возвращает список публикаций, для которых пользователь является автором"""
 
         queryset = super().get_queryset(*args, **kwargs)
         user = self.request.user
@@ -61,13 +61,13 @@ class PublicationDetailView(DetailView):
         """Счетчик просмотров"""
         self.object = super().get_object(queryset)
         self.object.views_count += 1
-        self.object.save(update_fields=['views_count'])
+        self.object.save(update_fields=["views_count"])
         return self.object
 
     def get_context_data(self, **kwargs):
         """Добавляем форму комментария"""
         context = super().get_context_data(**kwargs)
-        context['comment_form'] = CommentForm()
+        context["comment_form"] = CommentForm()
         return context
 
 
@@ -115,7 +115,7 @@ class PublicationDeleteView(DeleteView, LoginRequiredMixin):
 
     model = Publication
     extra_context = {"title": "Удалить публикацию"}
-    permission_required = 'publications.publication_delete'
+    permission_required = "publications.publication_delete"
     success_url = reverse_lazy("publications:publication_list")
 
 
@@ -130,11 +130,17 @@ class AddRemoveLike(View, LoginRequiredMixin):
                 """если пользователь еще не ставил лайк"""
                 post.liked_by.add(request.user)
                 post.save()
-                return HttpResponseRedirect(reverse("publications:publication_view", args=[str(pk)]))
+                return HttpResponseRedirect(
+                    reverse("publications:publication_view", args=[str(pk)])
+                )
             else:
                 """если пользователь уже ставил лайк"""
                 post.liked_by.remove(request.user)
                 post.save()
-                return HttpResponseRedirect(reverse("publications:publication_view", args=[str(pk)]))
+                return HttpResponseRedirect(
+                    reverse("publications:publication_view", args=[str(pk)])
+                )
 
-        return HttpResponseRedirect(reverse("publications:publication_view", args=[str(pk)]))
+        return HttpResponseRedirect(
+            reverse("publications:publication_view", args=[str(pk)])
+        )

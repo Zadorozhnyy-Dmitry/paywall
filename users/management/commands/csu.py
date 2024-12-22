@@ -9,7 +9,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         user = User.objects.create(phone="+79999999999")
         user.set_password("admin")
-        user.nickname = 'admin'
+        user.nickname = "admin"
         user.is_active = True
         user.is_staff = True
         user.is_superuser = True

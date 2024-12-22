@@ -8,7 +8,7 @@ from users.models import User
 def verify_view(request):
     """Проверка логина пользователя по высылаемому коду в смс"""
     form = CodeForm(request.POST or None)
-    pk = request.session.get('pk')
+    pk = request.session.get("pk")
 
     if pk:
         # получаем пользователя
@@ -25,14 +25,14 @@ def verify_view(request):
             print(code_user)
         # проверка введенного кода
         if form.is_valid():
-            num = form.cleaned_data.get('number')
+            num = form.cleaned_data.get("number")
 
             if code.number == num:
                 # в БД обновляю код верификации
                 code.save()
                 # авторизирую пользователя
                 login(request, user)
-                return redirect('publications:publication_list')
+                return redirect("publications:publication_list")
             else:
-                return redirect('users:login')
-    return render(request, 'codes/verify.html', {'form': form})
+                return redirect("users:login")
+    return render(request, "codes/verify.html", {"form": form})

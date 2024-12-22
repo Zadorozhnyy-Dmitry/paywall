@@ -20,8 +20,8 @@ class UserRegisterForm(StyleFormMixin, PhoneForm, UserCreationForm):
             "phone",
             "password1",
             "password2",
-            'avatar',
-            'nickname',
+            "avatar",
+            "nickname",
         )
 
 
@@ -31,9 +31,9 @@ class PaidSubscriptionForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = PaidSubscription
         fields = (
-            'user',
-            'paid_date',
-            'amount',
-            'session_id',
-            'link',
+            "user",
+            "paid_date",
+            "amount",
+            "session_id",
+            "link",
         )

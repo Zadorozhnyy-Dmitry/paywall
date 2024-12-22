@@ -6,15 +6,21 @@ from config.settings import AUTH_USER_MODEL, NULLABLE
 class Publication(models.Model):
     """Модель для публикации"""
 
-    title = models.CharField(max_length=150, verbose_name='Заголовок', help_text='Введите заголовок публикации')
-    body = models.TextField(verbose_name='Содержимое', help_text='Введите содержимое статьи')
-    preview = models.ImageField(
-        upload_to='publications/photo',
-        verbose_name='Изображение',
-        help_text='Добавьте изображение',
-        **NULLABLE
+    title = models.CharField(
+        max_length=150,
+        verbose_name="Заголовок",
+        help_text="Введите заголовок публикации",
     )
-    slug = models.CharField(max_length=150, verbose_name='Slug', **NULLABLE)
+    body = models.TextField(
+        verbose_name="Содержимое", help_text="Введите содержимое статьи"
+    )
+    preview = models.ImageField(
+        upload_to="publications/photo",
+        verbose_name="Изображение",
+        help_text="Добавьте изображение",
+        **NULLABLE,
+    )
+    slug = models.CharField(max_length=150, verbose_name="Slug", **NULLABLE)
     created_at = models.DateField(
         auto_now_add=True,
         verbose_name="Дата создания",
@@ -31,14 +37,14 @@ class Publication(models.Model):
     )
     liked_by = models.ManyToManyField(
         AUTH_USER_MODEL,
-        verbose_name='Пользователи, которые поставили лайк',
-        related_name="liked_posts"
+        verbose_name="Пользователи, которые поставили лайк",
+        related_name="liked_posts",
     )
 
     def __str__(self):
-        return f'{self.title} {self.created_at}'
+        return f"{self.title} {self.created_at}"
 
     class Meta:
-        verbose_name = 'Публикация'
-        verbose_name_plural = 'Публикации'
-        ordering = ['-id']
+        verbose_name = "Публикация"
+        verbose_name_plural = "Публикации"
+        ordering = ["-id"]

@@ -9,11 +9,16 @@ from django.contrib.auth.views import LoginView
 
 from django.contrib.auth import authenticate
 
-from users.services import create_stripe_product, create_stripe_price, create_stripe_sessions
+from users.services import (
+    create_stripe_product,
+    create_stripe_price,
+    create_stripe_sessions,
+)
 
 
 class UserLoginView(LoginView):
     """Расширенный вариант базового контроллера логина"""
+
     template_name = "users/login.html"
     extra_context = {"title": "Вход"}
 
@@ -24,14 +29,14 @@ class UserLoginView(LoginView):
         Пользователь не авторизовывавется
         """
 
-        if self.request.method == 'POST':
-            username = self.request.POST.get('username')
-            password = self.request.POST.get('password')
+        if self.request.method == "POST":
+            username = self.request.POST.get("username")
+            password = self.request.POST.get("password")
             user = authenticate(self.request, username=username, password=password)
             if user is not None:
-                self.request.session['pk'] = user.pk
-                return redirect('codes:verify')
-        return render(self.request, 'users/login.html', {'form': form})
+                self.request.session["pk"] = user.pk
+                return redirect("codes:verify")
+        return render(self.request, "users/login.html", {"form": form})
 
 
 class UserCreateView(CreateView):
@@ -67,4 +72,4 @@ class PaidSubscriptionCreateView(CreateView):
         # флаг, что пользователь оплатил подписку
         user.is_sub = True
         user.save()
-        return redirect(f'{subscription.link}')
+        return redirect(f"{subscription.link}")

@@ -10,8 +10,8 @@ class CodeModelTest(TestCase):
     def setUp(self):
         """Фикстуры меняются при применении методов класса"""
         self.user = User.objects.create(
-            phone='+79999999999',
-            nickname='admin',
+            phone="+79999999999",
+            nickname="admin",
         )
         self.code = Code.objects.create(
             user=self.user,
@@ -20,11 +20,11 @@ class CodeModelTest(TestCase):
     def test_labels(self):
         """Проверка атрибутов verbose_name Code"""
 
-        field_label_number = self.code._meta.get_field('number').verbose_name
-        field_label_user = self.code._meta.get_field('user').verbose_name
+        field_label_number = self.code._meta.get_field("number").verbose_name
+        field_label_user = self.code._meta.get_field("user").verbose_name
 
-        self.assertEquals(field_label_number, 'Код верификации')
-        self.assertEquals(field_label_user, 'user')
+        self.assertEquals(field_label_number, "Код верификации")
+        self.assertEquals(field_label_user, "user")
 
     def test_number_field(self):
         """Проверка создания, содержания и изменения кода верификации"""

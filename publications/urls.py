@@ -1,19 +1,42 @@
 from django.urls import path
 
 from publications.apps import PublicationsConfig
-from publications.views import PublicationListView, PublicationDetailView, PublicationCreateView, PublicationUpdateView, \
-    PublicationDeleteView, AddRemoveLike, PublicationOwnerListView
+from publications.views import (
+    PublicationListView,
+    PublicationDetailView,
+    PublicationCreateView,
+    PublicationUpdateView,
+    PublicationDeleteView,
+    AddRemoveLike,
+    PublicationOwnerListView,
+)
 
 app_name = PublicationsConfig.name
 
 urlpatterns = [
-    path('', PublicationListView.as_view(), name='publication_list'),  # список публикаций
-    path('owner_pub/', PublicationOwnerListView.as_view(), name='owner_pub'),  # вывод списка собственных публикаций
-    path('view/<int:pk>/', PublicationDetailView.as_view(), name='publication_view'),  # просмотр одной публикации
-    path("create/", PublicationCreateView.as_view(), name="publication_create"),  # создание публикации
-    path("update/<int:pk>/", PublicationUpdateView.as_view(), name="publication_update", ),  # редактирование публикации
-    path("delete/<int:pk>/", PublicationDeleteView.as_view(), name="publication_delete", ),  # удаление публикации
-
-    path('<int:pk>/like/', AddRemoveLike.as_view(), name='like')  # установить/удалить лайк
-
+    path(
+        "", PublicationListView.as_view(), name="publication_list"
+    ),  # список публикаций
+    path(
+        "owner_pub/", PublicationOwnerListView.as_view(), name="owner_pub"
+    ),  # вывод списка собственных публикаций
+    path(
+        "view/<int:pk>/", PublicationDetailView.as_view(), name="publication_view"
+    ),  # просмотр одной публикации
+    path(
+        "create/", PublicationCreateView.as_view(), name="publication_create"
+    ),  # создание публикации
+    path(
+        "update/<int:pk>/",
+        PublicationUpdateView.as_view(),
+        name="publication_update",
+    ),  # редактирование публикации
+    path(
+        "delete/<int:pk>/",
+        PublicationDeleteView.as_view(),
+        name="publication_delete",
+    ),  # удаление публикации
+    path(
+        "<int:pk>/like/", AddRemoveLike.as_view(), name="like"
+    ),  # установить/удалить лайк
 ]

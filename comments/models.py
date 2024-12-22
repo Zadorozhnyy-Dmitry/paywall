@@ -10,9 +10,9 @@ class Comment(models.Model):
     publication = models.ForeignKey(
         Publication,
         on_delete=models.CASCADE,
-        verbose_name='Публикация',
-        related_name='comments',
-        **NULLABLE
+        verbose_name="Публикация",
+        related_name="comments",
+        **NULLABLE,
     )
     author = models.ForeignKey(
         AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name="Автор", **NULLABLE
@@ -21,12 +21,12 @@ class Comment(models.Model):
         auto_now_add=True,
         verbose_name="Дата и время создания",
     )
-    text = models.TextField(verbose_name='Текст', **NULLABLE)
+    text = models.TextField(verbose_name="Текст", **NULLABLE)
 
     def __str__(self):
-        return f'Комментарий от {self.author} к публикации {self.publication}'
+        return f"Комментарий от {self.author} к публикации {self.publication}"
 
     class Meta:
-        verbose_name = 'Комментарий'
-        verbose_name_plural = 'Комментарии'
-        ordering = ['id']
+        verbose_name = "Комментарий"
+        verbose_name_plural = "Комментарии"
+        ordering = ["id"]

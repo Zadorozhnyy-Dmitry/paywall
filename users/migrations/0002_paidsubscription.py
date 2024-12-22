@@ -9,23 +9,66 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('users', '0001_initial'),
+        ("users", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='PaidSubscription',
+            name="PaidSubscription",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('paid_date', models.DateTimeField(blank=True, default=datetime.datetime.now, null=True, verbose_name='Дата оплаты')),
-                ('amount', models.PositiveSmallIntegerField(blank=True, null=True, verbose_name='Сумма оплаты')),
-                ('session_id', models.CharField(blank=True, max_length=255, null=True, verbose_name='Id сессии')),
-                ('link', models.URLField(blank=True, max_length=400, null=True, verbose_name='Ссылка на оплату')),
-                ('user', models.OneToOneField(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='Пользователь')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "paid_date",
+                    models.DateTimeField(
+                        blank=True,
+                        default=datetime.datetime.now,
+                        null=True,
+                        verbose_name="Дата оплаты",
+                    ),
+                ),
+                (
+                    "amount",
+                    models.PositiveSmallIntegerField(
+                        blank=True, null=True, verbose_name="Сумма оплаты"
+                    ),
+                ),
+                (
+                    "session_id",
+                    models.CharField(
+                        blank=True, max_length=255, null=True, verbose_name="Id сессии"
+                    ),
+                ),
+                (
+                    "link",
+                    models.URLField(
+                        blank=True,
+                        max_length=400,
+                        null=True,
+                        verbose_name="Ссылка на оплату",
+                    ),
+                ),
+                (
+                    "user",
+                    models.OneToOneField(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                        verbose_name="Пользователь",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Платеж',
-                'verbose_name_plural': 'Платежи',
+                "verbose_name": "Платеж",
+                "verbose_name_plural": "Платежи",
             },
         ),
     ]

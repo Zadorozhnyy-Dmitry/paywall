@@ -6,6 +6,5 @@ from codes.views import verify_view
 app_name = CodesConfig.name
 
 urlpatterns = [
-    path('verify', verify_view, name='verify'),  # маршрутизация к верификации
-
+    path("verify", verify_view, name="verify"),  # маршрутизация к верификации
 ]
